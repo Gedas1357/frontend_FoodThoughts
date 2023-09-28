@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import SearchButton from "./components/SearchButton"
+import {useState} from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseOver = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(false);
+    };
+
+  return (<div className="flex flex-col h-screen w-screen items-center">
+          <div className="flex complete-center text-6xl h-1/6 w-8/12"><h1>What do you want to eat?</h1></div>
+          <div className="flex flex-row items-center justify-evenly h-1/6 w-8/12">
+              <SearchButton text="Idk. What are the options?"/>
+              <SearchButton text="Idk. You choose"/>
+              <button className="fixed top-3 right-2 h-20 w-28 hover:simple-border hover:bg-green-600 font-bold"
+                      onMouseOver={handleMouseOver}
+                      onMouseOut={handleMouseOut}>{isHovering && "Pizza"}</button>
+          </div>
+      </div>
+
   );
 }
 
