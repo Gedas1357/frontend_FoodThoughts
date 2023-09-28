@@ -1,32 +1,20 @@
-import SearchButton from "./components/SearchButton";
-import {useState} from 'react';
-import Navbar from './pages/NavBar';
+
+import Navbar from './components/NavBar';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Ingredients from './pages/Ingredients';
+import Recipes from './pages/Recipes';
 
 function App() {
 
-    const [isHovering, setIsHovering] = useState(false);
-
-    const handleMouseOver = () => {
-        setIsHovering(true);
-    };
-
-    const handleMouseOut = () => {
-        setIsHovering(false);
-    };
-
   return (<div className="flex flex-col h-screen w-screen items-center">
           <Navbar/>
-          <div className="flex complete-center text-6xl h-1/6 w-8/12">
-              <h1>What do you want to eat?</h1>
-          </div>
-          <div className="flex flex-row items-center justify-evenly h-1/6 w-8/12">
-              <SearchButton text="Idk. What are the options?"/>
-              <SearchButton text="Idk. You choose"/>
-              <button className="fixed top-16 right-2 h-20 w-28 hover:simple-border hover:bg-green-600 font-bold"
-                      onMouseOver={handleMouseOver}
-                      onMouseOut={handleMouseOut}>{isHovering && "Pizza"}</button>
-          </div>
-      </div>
+          <Routes>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/ingredients" element={<Ingredients/>}/>
+              <Route path="/recipes" element={<Recipes/>}/>
+          </Routes>
+  </div>
 
   );
 }
