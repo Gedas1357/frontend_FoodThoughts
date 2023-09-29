@@ -7,7 +7,7 @@ import Recipes from './pages/Recipes';
 
 function App() {
 
-  return (<div className="flex flex-col h-screen w-screen items-center">
+  return (<div className="flex flex-col h-screen w-screen">
           <Navbar/>
           <Routes>
               <Route path="/" element={<Home/>}/>

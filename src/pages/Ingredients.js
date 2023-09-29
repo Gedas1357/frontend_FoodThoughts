@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getIngredients } from "../requests/Ingredients";
+import IngredientBar from "../components/IngredientBar";
 
 const Ingredients = () => {
     const [ingredientList, setIngredientList] = useState([]);
@@ -9,12 +10,10 @@ const Ingredients = () => {
     },[]);
 
     return (
-        <div>
+        <div className="flex flex-col right-1/4 space-y-3 max-h-4/5 w-full overflow-y-auto pt-5">
             {ingredientList.map((ingredient, index) => {
                 return (
-                    <div key={index}>
-                        <h2>{ingredient.name}</h2>
-                    </div>
+                    <IngredientBar ingredient={ingredient} key={index}/>
                 );
             })}
 
