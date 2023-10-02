@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getIngredients, postIngredient } from "../requests/Ingredients";
 import IngredientBar from "../components/IngredientBar";
 import AddButton from "../components/AddButton";
+import DeleteButton from "../components/DeleteButton";
 
 const Ingredients = () => {
     const [ingredientList, setIngredientList] = useState([]);
@@ -11,9 +12,8 @@ const Ingredients = () => {
         getIngredients(setIngredientList);
     },[]);
 
-    const handleAdd = (e) => {
-        e.preventDefault();
-        postIngredient(ingredientName);
+     async function handleAdd(e) {
+        await postIngredient(ingredientName);
     }
 
     return (
@@ -22,7 +22,11 @@ const Ingredients = () => {
             <div className="flex flex-col right-1/4 space-y-3 h-3/6 grow-0 w-4/5 overflow-y-auto">
                 {ingredientList.map((ingredient, index) => {
                     return (
-                        <IngredientBar ingredient={ingredient} key={index}/>
+                        <div className="flex flex-row space-x-3" key={index}>
+                            <IngredientBar ingredient={ingredient}/>
+                            <DeleteButton ingredient={ingredient}/>
+                        </div>
+
                     );
                 })}
             </div>
