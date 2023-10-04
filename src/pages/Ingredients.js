@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getIngredients, postIngredient } from "../requests/Ingredients";
+import { getIngredients, postIngredient, deleteIngredient } from "../requests/Ingredients";
 import IngredientBar from "../components/IngredientBar";
 import AddButton from "../components/AddButton";
 import DeleteButton from "../components/DeleteButton";
@@ -16,6 +16,14 @@ const Ingredients = () => {
         await postIngredient(ingredientName);
     }
 
+    async function handleDelete(ingredient) {
+         console.log("Works");
+        if (window.confirm("Are you sure you want to delete \"" + ingredient.name + "\" from the ingredient list?")) {
+            await deleteIngredient(ingredient.id);
+            window.location.reload();
+        }
+    }
+
     return (
         <div className="flex flex-col min-h-0 ps-[10%] space-y-5">
             <h1 className="font-bold text-2xl pt-5">Ingredients</h1>
@@ -24,7 +32,7 @@ const Ingredients = () => {
                     return (
                         <div className="flex flex-row space-x-3" key={index}>
                             <IngredientBar ingredient={ingredient}/>
-                            <DeleteButton ingredient={ingredient}/>
+                            <DeleteButton ingredient={ingredient} clickEvent={handleDelete}/>
                         </div>
 
                     );
